@@ -139,7 +139,10 @@ function checkInformations(div) {
 }
 
 function savePassword(password) {
-  window.location = window.location.pathname.replace('index.html', 'dash.html');
+  if(window.location.pathname.indexOf('index.html'))
+    window.location = window.location.pathname.replace('index.html', 'dash.html');
+  else
+    window.location = window.location.pathname + 'index.html';
 }
 
 function errorMessage(msg) {
