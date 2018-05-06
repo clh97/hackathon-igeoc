@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hackaton GEOC</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/animations.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/css/inputmask.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
+</head>
+<body>
+  <main id="pt-main">
+    <img class="pt-page__logo" src="img/logo.svg" alt="">
+    <div class="pt-page pt-page-1">
+      <div class="pt-page__container">
+        <div class="pt-page__container__content">
+          <h3 class="content__subtitle">Informe o código enviado:</h3>
+          <input class="content__code" type="text" placeholder="0000 0000">
+          <button class="content__enter" onclick="checkCode(this.previousElementSibling.value)">entrar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-page pt-page-2">
+      <div class="pt-page__container">
+        <div class="pt-page__container__content">
+          <div class="content__presentation">
+            <h1 class="content__presentation__hello">Olá, Tuxu!</h1>
+          </div>
+          <h3 class="content__subtitle">Confirme os primeiros digitos do seu CPF:</h3>
+          <input class="content__cpf" type="text" placeholder="***.000.000-00">
+          <h3 class="content__subtitle">Confirme seu sobrenome:</h3>
+          <input class="content__surname" data-inputmask="'suffix': 'Tuxu'" type="text" placeholder="Tuxu ************">
+          <button class="content__enter" onclick="checkInformations(this.parentElement)">confirmar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-page pt-page-3">
+      <div class="pt-page__container">
+        <div class="pt-page__container__content">
+          <h3 class="content__subtitle">Crie uma senha de até 6 digitos:</h3>
+          <input class="content__cpf" type="password" maxlength="6" placeholder="******">
+          <h3 class="content__subtitle">Confirme sua senha:</h3>
+          <input class="content__surname" type="password" maxlength="6" placeholder="******">
+          <button class="content__save" onclick="savePassword(this.previousElementSibling.value)">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+<script src="js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+<script src="js/pagetransitions.js"></script>
+<script src="js/index.js"></script>
+
+</html>

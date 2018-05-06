@@ -1,0 +1,10 @@
+<svg width="20" height="20" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Canvas" fill="none">
+<g id="grid-on">
+<path id="Rectangle-path (Stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M 0 1C 0 0.447715 0.447715 0 1 0L 8 0C 8.55228 0 9 0.447715 9 1L 9 8C 9 8.55228 8.55228 9 8 9L 1 9C 0.447715 9 0 8.55228 0 8L 0 1ZM 2 2L 2 7L 7 7L 7 2L 2 2Z" fill="white"/>
+<path id="Rectangle-path (Stroke)_2" fill-rule="evenodd" clip-rule="evenodd" d="M 0 1C 0 0.447715 0.447715 0 1 0L 8 0C 8.55228 0 9 0.447715 9 1L 9 8C 9 8.55228 8.55228 9 8 9L 1 9C 0.447715 9 0 8.55228 0 8L 0 1ZM 2 2L 2 7L 7 7L 7 2L 2 2Z" transform="translate(11 0)" fill="white"/>
+<path id="Rectangle-path (Stroke)_3" fill-rule="evenodd" clip-rule="evenodd" d="M 0 1C 0 0.447715 0.447715 0 1 0L 8 0C 8.55228 0 9 0.447715 9 1L 9 8C 9 8.55228 8.55228 9 8 9L 1 9C 0.447715 9 0 8.55228 0 8L 0 1ZM 2 2L 2 7L 7 7L 7 2L 2 2Z" transform="translate(11 11)" fill="white"/>
+<path id="Rectangle-path (Stroke)_4" fill-rule="evenodd" clip-rule="evenodd" d="M 0 1C 0 0.447715 0.447715 0 1 0L 8 0C 8.55228 0 9 0.447715 9 1L 9 8C 9 8.55228 8.55228 9 8 9L 1 9C 0.447715 9 0 8.55228 0 8L 0 1ZM 2 2L 2 7L 7 7L 7 2L 2 2Z" transform="translate(0 11)" fill="white"/>
+</g>
+</g>
+</svg>
