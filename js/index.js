@@ -3,8 +3,12 @@ const SPLASH_TIMEOUT = 1200;
 let splash = document.createElement('div');
 let splashImage = document.createElement('img');
 
+let app_person = undefined;
+let person_name = undefined;
+let person_cpf = undefined;
+let undiscovered_name = undefined;
+
 configSplash();
-configMasks();
 
 $('body').append(splash);
 
@@ -50,18 +54,61 @@ function configMasks() {
   $(code).inputmask('9999 9999', {"placeholder": "0"})
 
   const cpf = $('.content__cpf')[0];
-  $(cpf).inputmask('999.123.456-78', {"placeholder": "*"})
+  let formattedCpf = formataCPF(app_person.cpf).substr(3, app_person.cpf.length);
+  $(cpf).inputmask('999' + formattedCpf, {"placeholder": "?"})
+
+  let second_name = app_person
+    .nome
+    .split(/[ ]+/)[1];
+  let count = second_name.length;
+  if (second_name === 'de' || second_name === 'da' || second_name === 'do') {
+    second_name = app_person
+      .nome
+      .split(/[ ]+/)[2];
+  }
+
+  let str_len = '';
+  for (let index = 0; index < count; index++) {
+    str_len += '*';
+  }
 
   const surname = $('.content__surname')[0];
-  $(surname).inputmask('Tuxu aaaaaaaaaaaa', {"placeholder": "*"})
+  $(surname).inputmask(person_name + ' ' + str_len, {
+    "placeholder": "*",
+    'translation': {
+      '*': {
+        pattern: /[a-z*]/
+      }
+    }
+  })
+
 }
 
 function checkCode(code) {
   showLoading();
-    let codePromise = new Promise((resolve, reject) => {
-      if(code === "1111 1111")
-        setTimeout(resolve, 1000, 'code');
-        else {
+
+  $.ajax({
+    type: 'GET',
+    dataType: 'json',
+    url: 'https://findebt.mybluemix.net/cliente',
+    success: data => {
+      let content = undefined;
+
+      person = data.filter(p => p.codigo == code.replace(' ', ''))
+      let codePromise = new Promise((resolve, reject) => {
+        if (person.length == 1) {
+          app_person = person[0];
+          person_name = person[0]
+            .nome
+            .split(/[ ]+/)[0];
+          configMasks();
+          changeUsername(person_name);
+          let formattedCpf = formataCPF(app_person.cpf).substr(3, app_person.cpf.length);
+          $('.content__cpf')[0].setAttribute('placeholder', `???${formattedCpf}`);
+
+
+          setTimeout(resolve, 1000, 'code');
+        } else {
           hideLoading();
           this.reject();
         }
@@ -72,7 +119,9 @@ function checkCode(code) {
       }).catch(() => {
         hideLoading();
         errorMessage('Código inválido.');
-    })
+      })
+    }
+  })
 }
 
 function showLoading() {
@@ -83,8 +132,8 @@ function showLoading() {
   $(loading).attr('src', 'img/loading.gif');
   $(loading).attr('id', 'loading-icon');
   //if($('.pt-page__container').hasClass)
-  $('.pt-page').each( (i, e) => {
-    if($(e).hasClass('pt-page-current')) {
+  $('.pt-page').each((i, e) => {
+    if ($(e).hasClass('pt-page-current')) {
       $(e.lastElementChild).append(loading);
     }
   })
@@ -107,48 +156,61 @@ function fadePresentation() {
   })
 }
 
+function formataCPF(cpf) {
+  cpf = cpf.replace(/[^\d]/g, "");
+
+  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+}
+
 function checkInformations(div) {
   showLoading();
-    let inputs = [];
-    $(div.children).each((i, e) => {
-      if(e.localName === 'input') {
-        inputs.push(e);
-      }
-    })
+  let inputs = [];
+  $(div.children).each((i, e) => {
+    if (e.localName === 'input') {
+      inputs.push(e);
+    }
+  })
 
-    const cpf = inputs[0].value;
-    const surname = inputs[1].value;
+  const cpf = inputs[0].value;
+  const surname = inputs[1].value;
 
-    let newSurname = surname.replace(/[*]/g, "");
+  let newSurname = surname.replace(/[*]/g, "");
+  let newCpf = cpf
+    .replace('.', '')
+    .replace('-', '');
 
-    let infoPromise = new Promise((resolve, reject) => {
-      if(cpf == "111.123.456-78" & newSurname.toLowerCase() == "tuxu nery")
-        setTimeout(resolve, 1000, 'informations');
-        else {
-          hideLoading();
-          this.reject();
-        }
-      }).then(() => {
-        changePage(2);
-        hideLoading();
-        fadePresentation();
-      }).catch(() => {
-        hideLoading();
-        errorMessage('Informações inválidas.');
-    })
+  let infoPromise = new Promise((resolve, reject) => {
+    console.log(app_person.nome.toLowerCase(), newSurname.toLowerCase())
+    console.log(newCpf, app_person.cpf)
+    if (newCpf == app_person.cpf & app_person.nome.toLowerCase().includes(newSurname.toLowerCase())) 
+      setTimeout(resolve, 1000, 'informations');
+    else {
+      hideLoading();
+      this.reject();
+    }
+  }).then(() => {
+    changePage(2);
+    hideLoading();
+    fadePresentation();
+  }).catch(() => {
+    hideLoading();
+    errorMessage('Informações inválidas.');
+  })
 }
 
 function savePassword(password) {
-  if(window.location.pathname.indexOf('index.html'))
+  if (window.location.pathname.indexOf('index.html')) 
     window.location = window.location.pathname.replace('index.html', 'dash.html');
-  else
+  else 
     window.location = window.location.pathname + 'index.html';
-}
+  }
 
 function errorMessage(msg) {
   alert(msg);
 }
 
-function cardHover(card) {
-
+function changeUsername(name) {
+  $('.content__presentation__hello')[0].innerHTML = $('.content__presentation__hello')[0]
+    .innerHTML
+    .replace('{{first-name}}', name);
 }
