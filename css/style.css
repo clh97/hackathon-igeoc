@@ -3,6 +3,7 @@ html {
   --yellow-bg: #f1b400;
   --blue-bg: #e1e9f5;
   --cool-black: #494949;
+  --santander-red: #e00303;
 }
 
 * {
@@ -213,6 +214,10 @@ button:hover {
   background: none;
 }
 
+.nav__menu {
+  background: none;
+}
+
 .nav__menu__image {
   vertical-align: middle;
 }
@@ -283,7 +288,7 @@ button:hover {
   border-bottom-right-radius: 8px;
   width: 100%;
   height: 15%;
-  background: var(--yellow-bg);
+  background: var(--santander-red);
 }
 
 .card__footer__brand {
@@ -414,6 +419,16 @@ button:hover {
   width: 100%;
   text-align: center;
   padding-top: 12px;
+}
+
+.nav__menu:hover {
+	background: none;
+}
+
+.chatbot:hover {
+	background: url(../img/btn-bot.svg);
+	background-size: cover;
+  background-position: center;
 }
 
 #timeline {
