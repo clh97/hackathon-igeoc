@@ -20,3 +20,8 @@ $('.nav__items h2').click( e => {
   $(e.currentTarget.siblings).css('color', 'var(--cool-black)')
   $(e.currentTarget).css('color', 'var(--yellow-bg)')
 })
+
+$('.black-glass').click( () => {
+  $('.nav__items').toggleClass('nav__items--shown')
+  $('.black-glass').toggleClass('black-glass--shown')
+} )
